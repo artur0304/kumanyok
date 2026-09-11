@@ -7,7 +7,7 @@ assert.equal(totalPrice(initialResources[9],'2026-12-03',9,12,8),2400);
 assert.equal(totalPrice(initialResources[8],'2026-12-05',9,12,8),1600);
 assert.equal(totalPrice(initialResources[10],'2026-12-05',9,12,10),3200);
 assert.equal(totalPrice(initialResources[10],'2026-12-05',9,12,10,{...defaults,extraHourly:true}),3600);
-const b={resource:'sauna',date:'2027-04-20',start:9,end:12,guests:10,deposit:500,name:'LOCAL QA',phone:'+380000000000'};
+const b={resource:'sauna',date:'2027-08-20',start:9,end:12,guests:10,deposit:500,name:'LOCAL QA',phone:'+380000000000'};
 assert.equal((await post({...b,end:11})).status,400);
 assert.equal((await post({...b,deposit:499})).status,400);
 assert.equal((await post({...b,deposit:4000})).status,400);
