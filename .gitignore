@@ -46,3 +46,6 @@ next-env.d.ts
 /work/
 /.git-publish/
 !/.env.example
+*.tsbuildinfo
+/*.tar.gz
+/pack-stage-*/
