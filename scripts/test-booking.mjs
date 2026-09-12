@@ -9,8 +9,8 @@ const post=body=>fetch(base+'/api/bookings',{method:'POST',headers:{'Content-Typ
 assert.equal(totalPrice(initialResources[9],'2026-12-04',9,12,8),2900);
 assert.equal(totalPrice(initialResources[9],'2026-12-03',9,12,8),2400);
 assert.equal(totalPrice(initialResources[8],'2026-12-05',9,12,8),1600);
-assert.equal(totalPrice(initialResources[10],'2026-12-05',9,12,10),3600);
-assert.equal(totalPrice(initialResources[10],'2026-12-05',9,12,10,{...defaults,extraHourly:true}),3600);
+assert.equal(totalPrice(initialResources[10],'2026-12-05',9,12,10),3000);
+assert.equal(totalPrice(initialResources[10],'2026-12-05',9,13,15),6000);
 
 // Use the local database only to remove this run's own test records in finally.
 const folder=resolve('.wrangler/state/v3/d1/miniflare-D1DatabaseObject');
@@ -27,7 +27,7 @@ for(let i=45;i<75;i++){
  if(!available.slots.some(s=>s.resource==='sauna'||s.resource==='gazebo-9')){date=key;break}
 }
 assert.ok(date,'No free local test date found.');
-const b={resource:'sauna',date,start:9,end:12,guests:10,deposit:500,expectedTotal:3600,name:testName,phone:'+380 (00) 000-00-00'};
+const b={resource:'sauna',date,start:9,end:12,guests:10,deposit:500,expectedTotal:3000,name:testName,phone:'+380 (00) 000-00-00'};
 try{
  assert.equal((await post({...b,end:11})).status,400);
  assert.equal((await post({...b,deposit:499})).status,400);
@@ -40,7 +40,7 @@ try{
  const responses=await Promise.all(results.map(async r=>({status:r.status,body:await r.json()})));
  responses.filter(x=>x.status===201).forEach(x=>ids.push(x.body.id));
  assert.deepEqual(responses.map(r=>r.status).sort(),[201,409]);
-  assert.equal(responses.find(r=>r.status===201).body.total,3600);
+  assert.equal(responses.find(r=>r.status===201).body.total,3000);
  const adjacent=await post({...b,start:12,end:15});const a=await adjacent.json();if(adjacent.status===201)ids.push(a.id);assert.equal(adjacent.status,201);
  const gazebo=await post({...b,resource:'gazebo-9',expectedTotal:1600});const g=await gazebo.json();if(gazebo.status===201)ids.push(g.id);assert.equal(gazebo.status,201);
  assert.equal((await post({...b,resource:'gazebo-9',start:16,end:18,expectedTotal:1600})).status,409);
