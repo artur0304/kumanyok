@@ -15,6 +15,13 @@
       "when": 1789118129709,
       "tag": "0001_noisy_colleen_wing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1789227276748,
+      "tag": "0002_next_demogoblin",
+      "breakpoints": true
     }
   ]
 }

@@ -214,7 +214,7 @@ function CalendarDayButton({
         className
       )}
       {...props}
-    ><span className={cn("calendar-date-marker",modifiers.today&&"is-today",modifiers.selected&&"is-selected")}>{children}</span></Button>
+    ><span className={cn("calendar-date-marker",modifiers.today&&"is-today",modifiers.selected&&"is-selected",modifiers.hasBookings&&"has-bookings")}>{children}</span></Button>
   )
 }
 

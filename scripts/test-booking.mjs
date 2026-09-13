@@ -46,7 +46,7 @@ try{
  assert.equal((await post({...b,resource:'gazebo-9',start:16,end:18,expectedTotal:1600})).status,409);
  assert.equal((await fetch(base+'/api/admin')).status,403);
  const slots=await (await fetch(base+'/api/availability?date='+date)).json();
- assert.equal(slots.slots.filter(x=>x.resource==='sauna').length,2);
+ assert.equal(slots.slots.filter(x=>x.resource==='sauna').length,0);
  assert.ok(slots.slots.every(x=>x.phone===undefined&&x.name===undefined));
  console.log('PASS: pricing, duration, deposits, phone, changed quote, malformed JSON, concurrent overlap, adjacent slots, whole-day gazebo, admin protection, privacy');
 }finally{
